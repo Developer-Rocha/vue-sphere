@@ -1,0 +1,28 @@
+@import './abstracts/mixins';
+// custom variables
+@import './abstracts/variables';
+
+// Boostrap
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+// custom
+@import './base/typography';
+@import './base/utilities';
+
+@import './components/alert';
+@import './components/breadcrumb';
+@import './components/buttons';
+@import './components/cards';
+@import './components/code';
+@import './components/dropdowns';
+@import './components/forms';
+@import './components/image';
+@import './components/navbars';
+@import './components/pagination';
+@import './components/progress';
+@import './components/scrollbar';
+@import './components/table';
+
+@import './layout/footer';
+@import './layout/header';
+@import './layout/sections';
