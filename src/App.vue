@@ -18,8 +18,11 @@ import SocialNavigation from './components/SocialNavigation.vue'
       <SocialNavigation />
     </div>
   </header>
-
-  <RouterView />
+  <div class="container-fluid">
+    <main class="tm-main">
+      <RouterView />
+    </main>
+  </div>
 </template>
 
 <style scoped></style>
