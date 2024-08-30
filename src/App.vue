@@ -1,22 +1,25 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import FirstNavigation from '@/components/FirstNavigation.vue'
+import MainNavigation from './components/MainNavigation.vue'
+import SocialNavigation from './components/SocialNavigation.vue'
 </script>
 
 <template>
-  <header>
-    <FirstNavigation />
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+  <header class="tm-header" id="tm-header">
+    <div class="tm-header-wrapper">
+      <button class="navbar-toggler" type="button" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="tm-site-header">
+        <div class="mb-3 mx-auto tm-site-logo"><i class="fas fa-times fa-2x"></i></div>
+        <h1 class="text-center">Vue Sphere</h1>
+      </div>
+      <MainNavigation />
+      <SocialNavigation />
     </div>
   </header>
 
   <RouterView />
 </template>
 
-<style scoped>
-@import '@/scss/theme.scss';
-</style>
+<style scoped></style>
