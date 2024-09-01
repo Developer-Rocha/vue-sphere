@@ -1,34 +1,51 @@
 <template>
     <article class="col-12 col-md-6 tm-post">
         <hr class="tm-hr-primary" />
-        <router-link :to="{ name: 'Article', params: { id: article.id } }">
+        <RouterLink :to="
+        { 
+            path: '/article-detail', 
+            query: { id: article.nid } 
+        }">
           <div class="tm-post-link-inner">
-            <img :src="article.relationships.field_image.data.url" alt="Image" class="img-fluid" />
+            <img :src="article.fieldImage.entity.fieldMediaImage.url" alt="Image" class="img-fluid" />
           </div>
           <span class="position-absolute tm-new-badge">New</span>
-          <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{ article.attributes.title }}</h2>
-        </router-link>
+          <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{ article.title }}</h2>
+        </RouterLink>
+        
         <p class="tm-pt-30">
-          {{ article.attributes.field_teaser }}
+          {{ article.fieldTeaser }}
         </p>
         <div class="d-flex justify-content-between tm-pt-45">
-          <span class="tm-color-primary">Travel . Events</span>
-          <span class="tm-color-primary">June 24, 2020</span>
+          <span v-for="tag in article.fieldTags" :key="tag.targetId" class="tm-color-primary">
+            {{ tag.entity.name }}
+          </span>
+          <span class="tm-color-primary">
+            {{ formatDate("1724875085") }}
+          </span>
         </div>
         <hr />
         <div class="d-flex justify-content-between">
-          <span>36 comments</span>
-          <span>by Admin Nat</span>
+          <span>by {{ article.entityOwner.name }}</span>
         </div>
       </article>
   </template>
-<script>
-export default {
-  props: {
-    article: {
-      type: Object,
-      required: true,
-    },
-  },
-};
+<script setup>
+import { RouterLink } from 'vue-router';
+
+const props = defineProps({
+  article: {
+    type: Object,
+    required: true,
+  }
+});
+
+function formatDate(timestamp) {
+  const date = new Date(timestamp * 1000); 
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: '2-digit',
+  });
+}
 </script>

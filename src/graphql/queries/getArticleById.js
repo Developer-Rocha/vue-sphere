@@ -6,11 +6,16 @@ export const GET_ARTICLE_BY_ID = gql `
       ... on NodeArticle {
         title
         nid
+        created
+        entityOwner {
+          name
+        }
         body {
           value
           format
           processed
         }
+        fieldTeaser
         fieldImage {
           entity {
             ... on MediaImage {
