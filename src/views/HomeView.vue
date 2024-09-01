@@ -1,7 +1,9 @@
-<script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+<script setup>
+import ArticleDetail from '../components/ArticleDetail.vue'
 </script>
 
 <template>
-  <main class="container"></main>
+  <main class="container">
+    <ArticleDetail articleId="1" />
+  </main>
 </template>

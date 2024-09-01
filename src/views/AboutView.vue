@@ -1,11 +1,11 @@
 <template>
   <div class="articles">
-    <Articles />
+    <ArticleList />
   </div>
 </template>
 
 <script setup lang="ts">
-import Articles from '@/components/ArticlesList.vue'
+import ArticleList from '@/components/ArticleList.vue'
 </script>
 
 <style>
