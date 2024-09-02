@@ -1,7 +1,9 @@
 <template>
   <div v-if="loading">Loading...</div>
   <div v-if="error">{{ error }}</div>
-  <div v-if="data.length" class="row tm-row">
+  <div v-if="data.length">
+    <hr class="mb-3 tm-hr-primary">
+    <h2 class="tm-mb-40 tm-post-title tm-color-primary">Related Posts</h2>
     <RouterLink
       v-for="article in data" :key="article.nid"
       class="d-block tm-mb-40"
@@ -19,7 +21,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_ARTICLES_BY_TAG } from '../graphql/queries/getArticlesByTag'
@@ -42,10 +44,15 @@ const props = defineProps({
 
 const termIds = props.termIds.map(term => String(term.targetId));
 
-const { loading, error, result } = useQuery(GET_ARTICLES_BY_TAG, {
+const { loading, error, result, refetch } = useQuery(GET_ARTICLES_BY_TAG, {
   nid: props.nid, 
   termIds: termIds, 
   limit: props.limit
 })
+
+watch(() => props.nid, (newId) => {
+  refetch({ nid: newId, termIds: termIds, limit: props.limit }) 
+})
+
 const data = computed(() => result.value?.nodeQuery.entities || [])
 </script>

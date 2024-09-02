@@ -7,7 +7,7 @@
           v-if="article.fieldImage"
           :src="article.fieldImage.entity.fieldMediaImage.url" 
           alt="Image" 
-          class="img-fluid" /> 
+          class="img-fluid article-banner" /> 
       </div>
     </div>
     <div class="row tm-row">
@@ -35,11 +35,7 @@
 
       <aside class="col-lg-4 tm-aside-col">
         <div class="tm-post-sidebar">
-          <hr class="mb-3 tm-hr-primary">
-          <h2 class="mb-4 tm-post-title tm-color-primary">Categories</h2>
           <TagList />
-          <hr class="mb-3 tm-hr-primary">
-          <h2 class="tm-mb-40 tm-post-title tm-color-primary">Related Posts</h2>
           <ArticlesByTag :nid="String(article.nid)" :termIds="article.fieldTags" :limit="6" />
         </div>                    
     </aside>
@@ -67,3 +63,8 @@ function formatDate(timestamp) {
   })
 }
 </script>
+<style scoped>
+.article-banner {
+  margin-bottom: 40px;
+}
+</style>
