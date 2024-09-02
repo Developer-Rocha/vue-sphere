@@ -1,5 +1,7 @@
 <template>
-  <ArticleDetail :article="article" />
+  <div v-if="loading">Loading...</div>
+  <div v-if="error">{{ error }}</div>
+  <ArticleDetail v-if="article" :article="article" />
 </template>
 
 <script setup>

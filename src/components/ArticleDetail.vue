@@ -1,9 +1,13 @@
 <template>
-  <div>
+  <div v-if="article.title">
     <div class="row tm-row">
       <div class="col-12">
           <hr class="tm-hr-primary tm-mb-55">
-          <img :src="article.fieldImage.entity.fieldMediaImage.url" alt="Image" class="img-fluid" /> 
+          <img 
+          v-if="article.fieldImage"
+          :src="article.fieldImage.entity.fieldMediaImage.url" 
+          alt="Image" 
+          class="img-fluid" /> 
       </div>
     </div>
     <div class="row tm-row">
@@ -36,12 +40,7 @@
           <TagList />
           <hr class="mb-3 tm-hr-primary">
           <h2 class="tm-mb-40 tm-post-title tm-color-primary">Related Posts</h2>
-          <!-- <a href="#" class="d-block tm-mb-40">
-            <figure>
-              <img src="img/img-02.jpg" alt="Image" class="mb-3 img-fluid">
-              <figcaption class="tm-color-primary">Duis mollis diam nec ex viverra scelerisque a sit</figcaption>
-            </figure>
-          </a> -->
+          <ArticlesByTag :nid="String(article.nid)" :termIds="article.fieldTags" :limit="6" />
         </div>                    
     </aside>
     </div>
@@ -50,6 +49,7 @@
 
 <script setup>
 import TagList from './TagList.vue';
+import ArticlesByTag from './ArticlesByTag.vue';
 
 const props = defineProps({
   article: {
