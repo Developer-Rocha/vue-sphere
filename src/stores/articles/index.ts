@@ -6,6 +6,5 @@ export const useArticleStore = defineStore('articleStore', () => {
   const isLoading = ref(false)
   const error = ref('')
 
-
   return { articles, isLoading, error }
 })

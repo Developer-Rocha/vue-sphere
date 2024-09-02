@@ -1,6 +1,6 @@
-import { gql } from "graphql-tag";
+import { gql } from 'graphql-tag'
 
-export const GET_ARTICLE_BY_ID = gql `
+export const GET_ARTICLE_BY_ID = gql`
   query GetArticleById($nid: String) {
     nodeById(id: $nid, language: EN) {
       ... on NodeArticle {
@@ -45,4 +45,4 @@ export const GET_ARTICLE_BY_ID = gql `
       }
     }
   }
-`;
+`

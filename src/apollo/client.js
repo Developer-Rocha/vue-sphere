@@ -1,10 +1,10 @@
-import { ApolloClient, createHttpLink  } from "@apollo/client/core";
-import cache from "./cache";
-import { setContext } from '@apollo/client/link/context';
+import { ApolloClient, createHttpLink } from '@apollo/client/core'
+import cache from './cache'
+import { setContext } from '@apollo/client/link/context'
 
 const httpLink = createHttpLink({
-  uri: 'https://vue-sphere.ddev.site/graphql',
-});
+  uri: 'https://vue-sphere.ddev.site/graphql'
+})
 
 // Adiciona o token de autenticação, se necessário
 // const authLink = setContext((_, { headers }) => {
@@ -19,7 +19,7 @@ const httpLink = createHttpLink({
 
 const apolloClient = new ApolloClient({
   link: httpLink,
-  cache: cache,
-});
+  cache: cache
+})
 
-export default apolloClient;
+export default apolloClient

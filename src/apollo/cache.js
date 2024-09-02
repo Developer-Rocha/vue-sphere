@@ -1,5 +1,5 @@
-import { InMemoryCache } from '@apollo/client/core';
+import { InMemoryCache } from '@apollo/client/core'
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache()
 
-export default cache;
+export default cache
