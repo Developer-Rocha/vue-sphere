@@ -20,7 +20,14 @@
           {{ tag.entityLabel }}
         </RouterLink>
       </li>
-      <button v-if="props.isFilter" type="button" @click="$emit('remove-tag')">Remove</button>
+      <button
+        v-if="props.isFilter"
+        type="button"
+        class="btn btn-primary"
+        @click="$emit('remove-tag')"
+      >
+        Remove
+      </button>
     </ul>
   </div>
 </template>
@@ -45,6 +52,12 @@ const tags = computed(() => result.value?.taxonomyTermQuery.entities || [])
 </script>
 
 <style scoped>
+.is-filter {
+  display: flex;
+  flex-flow: row-reverse;
+  padding-right: 30px;
+}
+
 .is-filter .tm-category-list {
   display: flex;
 }

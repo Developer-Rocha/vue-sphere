@@ -103,6 +103,7 @@ const removeTagQuery = () => {
   position: relative;
   display: block;
   margin-right: 30px;
+  margin-bottom: 30px;
   border-radius: 0;
   border-color: #0cc;
   font-size: 1.2rem;
