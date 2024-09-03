@@ -1,5 +1,5 @@
 import { gql } from 'graphql-tag'
-import { ARTICLE_FIELDS } from '../fragments/articleFragments';
+import { ARTICLE_FIELDS } from '../fragments/articleFragments'
 
 export const GET_ALL_ARTICLES = (search, hasTag) => gql`
   query GetAllArticles(
@@ -14,21 +14,28 @@ export const GET_ALL_ARTICLES = (search, hasTag) => gql`
             field: "status", 
             value: "1" 
           }
-          ${search ? `
+          ${
+            search
+              ? `
             ,{
               operator: LIKE,
               field: "title",
               value: $title
             }
-          ` : ''
+          `
+              : ''
           }
-          ${hasTag ? `
+          ${
+            hasTag
+              ? `
           ,{
             operator: IN, 
             field: "field_tags.entity.tid", 
             value: $tag
           }
-          ` : ''}
+          `
+              : ''
+          }
         ] 
       }
       limit: $limit
