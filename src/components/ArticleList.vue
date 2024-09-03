@@ -1,6 +1,16 @@
 <template>
   <div>
-    <input v-if="props.search" v-model="searchTitle" placeholder="Search by title..." @input="fetchArticles" />
+    <div v-if="props.search"  class="form-inline tm-mb-80 tm-search-form">
+      <div class="wrap-search-input">
+        <input 
+          v-model="searchTitle" 
+          placeholder="Search by title..." 
+          @input="fetchArticles"
+          class="form-control tm-search-input search-input"
+        />
+        <IconSearch size="30"/>
+      </div>
+    </div>
     
     <div v-if="loading">Loading...</div>
     <div v-if="error">{{ error }}</div>
@@ -20,6 +30,7 @@ import { computed, ref, watchEffect } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_ALL_ARTICLES } from '../graphql/queries/getAllArticles'
 import ArticleItem from './ArticleItem.vue'
+import { IconSearch } from '@tabler/icons-vue'
 
 const searchTitle = ref("");
 const props = defineProps({
@@ -58,3 +69,25 @@ watchEffect(() => {
 
 const articles = computed(() => result.value?.nodeQuery.entities || []);
 </script>
+
+<style scoped>
+.wrap-search-input {
+  position: relative;
+  display: block;
+  margin-right: 30px;
+  border-radius: 0;
+  border-color: #0cc;
+  font-size: 1.2rem;
+}
+.wrap-search-input svg{
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+.wrap-search-input .search-input {
+  width: 100%;
+  height: 100%;
+}
+</style>
