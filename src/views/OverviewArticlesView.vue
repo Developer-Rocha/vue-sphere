@@ -3,13 +3,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router';
 import ArticleList from '@/components/ArticleList.vue'
 
 const route = useRoute()
-const tag = ref(route.query.tag ? [route.query.tag] : [])
+const tag = ref(route.query.tag ? route.query.tag : "")
 
+watch(() => route.query.tag, (newTag) => {
+  tag.value = newTag ? newTag : ""
+})
 </script>
 
 <style scoped>

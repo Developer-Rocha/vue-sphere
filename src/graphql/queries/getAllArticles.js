@@ -1,10 +1,10 @@
 import { gql } from 'graphql-tag'
 import { ARTICLE_FIELDS } from '../fragments/articleFragments';
 
-export const GET_ALL_ARTICLES = (search, tag) => gql`
+export const GET_ALL_ARTICLES = (search, hasTag) => gql`
   query GetAllArticles(
     ${search ? `$title: [String],` : ''} 
-    ${tag && tag.length ? `$tag: [String],` : ''}
+    ${hasTag ? `$tag: [String],` : ''}
     $limit: Int, 
     ) {
     nodeQuery(
@@ -22,7 +22,7 @@ export const GET_ALL_ARTICLES = (search, tag) => gql`
             }
           ` : ''
           }
-          ${tag && tag.length ? `
+          ${hasTag ? `
           ,{
             operator: IN, 
             field: "field_tags.entity.tid", 
