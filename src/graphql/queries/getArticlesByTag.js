@@ -1,10 +1,10 @@
 import { gql } from 'graphql-tag'
 import { ARTICLE_FIELDS } from '../fragments/articleFragments';
 
-export const GET_ARTICLES_BY_TAG = (tIds) => gql`
+export const GET_ARTICLES_BY_TAG = (tag) => gql`
   query GetArticlesByTag(
       $nid: String, 
-      ${tIds && tIds.length ? `$termIds: [String],` : ''} 
+      ${tag && tag.length ? `$termIds: [String],` : ''} 
       $limit: Int
     ) {
     nodeQuery(
@@ -17,7 +17,7 @@ export const GET_ARTICLES_BY_TAG = (tIds) => gql`
             field: "nid"
             value: [$nid]
           } 
-          ${tIds && tIds.length ? `
+          ${tag && tag.length ? `
           ,{
             operator: IN, 
             field: "field_tags.entity.tid", 

@@ -8,9 +8,9 @@
         </RouterLink>
       </li>
       <li class="tm-nav-item">
-        <RouterLink to="/about" activeClass="active" class="tm-nav-link">
-          <IconUserFilled size="30" />
-          About
+        <RouterLink to="/article-overview" activeClass="active" class="tm-nav-link">
+          <IconArticleFilled size="30" />
+          Articles
         </RouterLink>
       </li>
     </ul>
@@ -19,6 +19,6 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
-import { IconHomeFilled, IconUserFilled } from '@tabler/icons-vue'
+import { IconHomeFilled, IconArticleFilled } from '@tabler/icons-vue'
 </script>
 <style scoped></style>

@@ -6,7 +6,15 @@
     <h2 class="mb-4 tm-post-title tm-color-primary">Categories</h2>
     <ul class="tm-mb-75 pl-5 tm-category-list">
       <li v-for="tag in tags" :key="tag.entityId">
-        <a href="#" class="tm-color-primary">{{ tag.entityLabel }}</a>
+        <RouterLink
+          class="tm-color-primary"
+          :to="{
+            name: 'OverviewArticle',
+            query: { tag: tag.entityId }
+          }"
+        >
+        {{ tag.entityLabel }}
+        </RouterLink>
       </li>
     </ul>
   </div>
@@ -14,7 +22,8 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_ALL_TAGS } from '../graphql/queries/getAllTags'
 

@@ -42,12 +42,11 @@ const props = defineProps({
   }
 })
 
-const tIds = props.termIds.map(term => String(term.targetId));
-// const tIds = [];
+const tag = props.termIds.map(term => String(term.targetId));
 
-const { loading, error, result, refetch } = useQuery(GET_ARTICLES_BY_TAG(tIds), {
+const { loading, error, result, refetch } = useQuery(GET_ARTICLES_BY_TAG(tag), {
   nid: props.nid, 
-  termIds: tIds,
+  termIds: tag,
   limit: props.limit
 })
 
