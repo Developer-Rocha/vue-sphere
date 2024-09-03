@@ -42,16 +42,17 @@ const props = defineProps({
   }
 })
 
-const termIds = props.termIds.map(term => String(term.targetId));
+const tIds = props.termIds.map(term => String(term.targetId));
+// const tIds = [];
 
-const { loading, error, result, refetch } = useQuery(GET_ARTICLES_BY_TAG, {
+const { loading, error, result, refetch } = useQuery(GET_ARTICLES_BY_TAG(tIds), {
   nid: props.nid, 
-  termIds: termIds, 
+  termIds: tIds,
   limit: props.limit
 })
 
 watch(() => props.nid, (newId) => {
-  refetch({ nid: newId, termIds: termIds, limit: props.limit }) 
+  refetch({ nid: newId, limit: props.limit }) 
 })
 
 const data = computed(() => result.value?.nodeQuery.entities || [])
