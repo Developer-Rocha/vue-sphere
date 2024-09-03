@@ -1,5 +1,5 @@
 import { gql } from 'graphql-tag'
-import { ARTICLE_FIELDS } from '../fragments/articleFragments';
+import { ARTICLE_FIELDS } from '../fragments/articleFragments'
 
 export const GET_ARTICLES_BY_TAG = (tag) => gql`
   query GetArticlesByTag(
@@ -17,13 +17,17 @@ export const GET_ARTICLES_BY_TAG = (tag) => gql`
             field: "nid"
             value: [$nid]
           } 
-          ${tag && tag.length ? `
+          ${
+            tag && tag.length
+              ? `
           ,{
             operator: IN, 
             field: "field_tags.entity.tid", 
             value: $termIds
           }
-          ` : ''}
+          `
+              : ''
+          }
         ],
       }){
       entities {

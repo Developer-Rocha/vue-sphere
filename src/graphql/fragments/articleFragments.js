@@ -1,4 +1,4 @@
-import { gql } from 'graphql-tag';
+import { gql } from 'graphql-tag'
 
 export const TAG_FIELDS = gql`
   fragment TagFields on TaxonomyTermTags {
@@ -8,7 +8,7 @@ export const TAG_FIELDS = gql`
       processed
     }
   }
-`;
+`
 
 export const IMAGE_FIELDS = gql`
   fragment ImageFields on MediaImage {
@@ -16,7 +16,7 @@ export const IMAGE_FIELDS = gql`
       url
     }
   }
-`;
+`
 
 export const ARTICLE_FIELDS = gql`
   fragment ArticleFields on NodeArticle {
@@ -51,4 +51,4 @@ export const ARTICLE_FIELDS = gql`
   }
   ${TAG_FIELDS}
   ${IMAGE_FIELDS}
-`;
+`

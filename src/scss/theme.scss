@@ -598,13 +598,15 @@ a:hover figcaption {
   .tm-post-sidebar {
     max-width: 440px;
   }
-  .form-inline .form-control.tm-search-input, .wrap-search-input {
+  .form-inline .form-control.tm-search-input,
+  .wrap-search-input {
     width: 420px;
   }
 }
 
 @media (max-width: 1086px) {
-  .form-inline .form-control.tm-search-input, .wrap-search-input {
+  .form-inline .form-control.tm-search-input,
+  .wrap-search-input {
     width: 80%;
     margin-right: 15px;
   }
@@ -676,7 +678,8 @@ a:hover figcaption {
 }
 
 @media (max-width: 767px) {
-  .form-inline .form-control.tm-search-input, .wrap-search-input {
+  .form-inline .form-control.tm-search-input,
+  .wrap-search-input {
     width: 70%;
     max-width: 375px;
     margin-right: 15px;
