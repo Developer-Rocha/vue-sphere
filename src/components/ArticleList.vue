@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watchEffect, watch } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_ALL_ARTICLES } from '../graphql/queries/getAllArticles'
