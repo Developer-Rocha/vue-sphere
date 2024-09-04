@@ -6,6 +6,8 @@ export const GET_ALL_ARTICLES = (search, hasTag) => gql`
     ${search ? `$title: [String],` : ''} 
     ${hasTag ? `$tag: [String],` : ''}
     $limit: Int, 
+    $language: LanguageId,
+    $langcode: String
     ) {
     nodeQuery(
       filter: { 
@@ -13,6 +15,11 @@ export const GET_ALL_ARTICLES = (search, hasTag) => gql`
           { 
             field: "status", 
             value: "1" 
+          },
+          {
+            operator: EQUAL,
+            field: "langcode.value",
+            value: [$langcode]
           }
           ${
             search
@@ -42,7 +49,11 @@ export const GET_ALL_ARTICLES = (search, hasTag) => gql`
       sort: {field: "created" direction: DESC}
     ){
       entities {
-        ...ArticleFields
+        ... on NodeArticle {
+          entityTranslation(language: $language) {
+            ...ArticleFields
+          }
+        }
       }
     }
   }

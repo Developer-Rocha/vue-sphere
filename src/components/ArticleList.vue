@@ -21,8 +21,8 @@
     <div v-if="articles.length" class="row tm-row">
       <ArticleItem
         v-for="(article, index) in articles"
-        :key="article.nid"
-        :article="article"
+        :key="index"
+        :article="article.entityTranslation"
         :new="index <= 1"
       />
     </div>
@@ -30,14 +30,18 @@
 </template>
 
 <script setup>
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref, watchEffect, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_ALL_ARTICLES } from '../graphql/queries/getAllArticles'
 import ArticleItem from './ArticleItem.vue'
 import TagList from './TagList.vue'
 import { IconSearch } from '@tabler/icons-vue'
+import { useConfigStore } from '@/stores/config'
 
+const configStore = useConfigStore()
+const currentLanguage = computed(() => configStore.currentLanguage)
+const currentLangcode = computed(() => configStore.currentLangcode)
 const searchTitle = ref('')
 const router = useRouter()
 const route = useRoute()
@@ -72,17 +76,33 @@ const { loading, error, result, refetch } = useQuery(
   {
     title: modifiedTitle.value,
     tag: props.tag,
-    limit: props.limit
+    limit: props.limit,
+    language: currentLanguage,
+    langcode: currentLangcode
   }
 )
 
-watchEffect(() => {
-  refetch({
-    title: modifiedTitle.value,
-    tag: props.tag,
-    limit: props.limit
-  })
-})
+watch(
+  [() => modifiedTitle.value, currentLanguage, currentLangcode],
+  ([newTitle, newLanguage, newLangcode]) => {
+    refetch({
+      title: newTitle,
+      tag: props.tag,
+      limit: props.limit,
+      language: newLanguage,
+      langcode: newLangcode
+    })
+  }
+)
+
+// watchEffect(() => {
+//   refetch({
+//     title: modifiedTitle.value,
+//     tag: props.tag,
+//     limit: props.limit,
+//     language: currentLanguage
+//   })
+// })
 
 const articles = computed(() => result.value?.nodeQuery.entities || [])
 
@@ -93,7 +113,12 @@ const removeTagQuery = () => {
     delete query.tag
     router.push({ query })
 
-    refetch({ title: modifiedTitle.value, tag: props.tag, limit: props.limit })
+    refetch({
+      title: modifiedTitle.value,
+      tag: props.tag,
+      limit: props.limit,
+      language: currentLanguage
+    })
   }
 }
 </script>

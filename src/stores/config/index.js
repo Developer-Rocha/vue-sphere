@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 
 export const useConfigStore = defineStore('configStore', {
   state: () => ({
@@ -7,11 +6,17 @@ export const useConfigStore = defineStore('configStore', {
       { code: 'EN', language: 'EN' },
       { code: 'PT_BR', language: 'PT' }
     ],
-    currentLanguage: 'EN'
+    currentLanguage: 'EN',
+    currentLangcode: 'en'
   }),
   actions: {
     switchLanguage(language) {
       this.currentLanguage = language
+      if (language === 'PT_BR') {
+        this.currentLangcode = 'pt-br'
+      } else {
+        this.currentLangcode = 'en'
+      }
     }
   }
 })
