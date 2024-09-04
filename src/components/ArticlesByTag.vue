@@ -5,21 +5,21 @@
     <hr class="mb-3 tm-hr-primary" />
     <h2 class="tm-mb-40 tm-post-title tm-color-primary">Related Posts</h2>
     <RouterLink
-      v-for="article in data"
-      :key="article.nid"
+      v-for="(article, index) in data"
+      :key="index"
       class="d-block tm-mb-40"
       :to="{
         name: 'ArticleDetail',
-        params: { id: article.nid }
+        params: { id: article.entityTranslation.nid }
       }"
     >
       <figure>
         <img
-          :src="article.fieldImage.entity.fieldMediaImage.url"
+          :src="article.entityTranslation.fieldImage.entity.fieldMediaImage.url"
           alt="Image"
           class="mb-3 img-fluid"
         />
-        <figcaption class="tm-color-primary">{{ article.title }}</figcaption>
+        <figcaption class="tm-color-primary">{{ article.entityTranslation.title }}</figcaption>
       </figure>
     </RouterLink>
   </div>
@@ -30,6 +30,11 @@ import { computed, ref, watch } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_ARTICLES_BY_TAG } from '../graphql/queries/getArticlesByTag'
+import { useConfigStore } from '@/stores/config'
+
+const configStore = useConfigStore()
+const currentLanguage = computed(() => configStore.currentLanguage)
+const currentLangcode = computed(() => configStore.currentLangcode)
 
 const props = defineProps({
   nid: {
@@ -52,15 +57,19 @@ const tag = props.termIds.map((term) => String(term.targetId))
 const { loading, error, result, refetch } = useQuery(GET_ARTICLES_BY_TAG(tag), {
   nid: props.nid,
   termIds: tag,
-  limit: props.limit
+  limit: props.limit,
+  language: currentLanguage,
+  langcode: currentLangcode
 })
 
-watch(
-  () => props.nid,
-  (newId) => {
-    refetch({ nid: newId, limit: props.limit })
-  }
-)
+watch([() => props.nid, currentLanguage, currentLangcode], ([newId, newLanguage, newLangcode]) => {
+  refetch({
+    nid: newId,
+    limit: props.limit,
+    language: newLanguage,
+    langcode: newLangcode
+  })
+})
 
 const data = computed(() => result.value?.nodeQuery.entities || [])
 </script>

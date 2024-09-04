@@ -95,15 +95,6 @@ watch(
   }
 )
 
-// watchEffect(() => {
-//   refetch({
-//     title: modifiedTitle.value,
-//     tag: props.tag,
-//     limit: props.limit,
-//     language: currentLanguage
-//   })
-// })
-
 const articles = computed(() => result.value?.nodeQuery.entities || [])
 
 const removeTagQuery = () => {
@@ -113,11 +104,16 @@ const removeTagQuery = () => {
     delete query.tag
     router.push({ query })
 
+    const newTitle = modifiedTitle.value
+    const newLanguage = currentLanguage.value
+    const newLangcode = currentLangcode.value
+
     refetch({
-      title: modifiedTitle.value,
-      tag: props.tag,
+      title: newTitle,
+      tag: '',
       limit: props.limit,
-      language: currentLanguage
+      language: newLanguage,
+      langcode: newLangcode
     })
   }
 }

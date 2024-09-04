@@ -5,7 +5,9 @@ export const GET_ARTICLES_BY_TAG = (tag) => gql`
   query GetArticlesByTag(
       $nid: String, 
       ${tag && tag.length ? `$termIds: [String],` : ''} 
-      $limit: Int
+      $limit: Int,
+      $language: LanguageId,
+      $langcode: String
     ) {
     nodeQuery(
       limit: $limit, 
@@ -16,7 +18,12 @@ export const GET_ARTICLES_BY_TAG = (tag) => gql`
             operator: NOT_EQUAL
             field: "nid"
             value: [$nid]
-          } 
+          },
+          {
+            operator: EQUAL,
+            field: "langcode.value",
+            value: [$langcode]
+          }
           ${
             tag && tag.length
               ? `
@@ -30,8 +37,12 @@ export const GET_ARTICLES_BY_TAG = (tag) => gql`
           }
         ],
       }){
-      entities {
-        ...ArticleFields
+        entities {
+        ... on NodeArticle {
+          entityTranslation(language: $language) {
+            ...ArticleFields
+          }
+        }
       }
     }
   }
