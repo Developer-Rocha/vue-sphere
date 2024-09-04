@@ -13,7 +13,7 @@
               : 'tm-color-primary'
           "
           :to="{
-            name: 'OverviewArticle',
+            path: '/article',
             query: { tag: tag.entityId }
           }"
         >

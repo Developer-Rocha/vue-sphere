@@ -8,7 +8,7 @@
         </RouterLink>
       </li>
       <li class="tm-nav-item">
-        <RouterLink to="/article-overview" activeClass="active" class="tm-nav-link">
+        <RouterLink to="/article" activeClass="active" class="tm-nav-link">
           <IconArticleFilled size="30" />
           Articles
         </RouterLink>
