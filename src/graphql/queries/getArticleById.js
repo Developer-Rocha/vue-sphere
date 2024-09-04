@@ -1,8 +1,8 @@
 import { gql } from 'graphql-tag'
 
 export const GET_ARTICLE_BY_ID = gql`
-  query GetArticleById($nid: String) {
-    nodeById(id: $nid, language: EN) {
+  query GetArticleById($nid: String, $language: LanguageId) {
+    nodeById(id: $nid, language: $language) {
       ... on NodeArticle {
         title
         nid
