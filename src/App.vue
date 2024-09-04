@@ -12,7 +12,7 @@ import SocialNavigation from './components/SocialNavigation.vue'
       </button>
       <div class="tm-site-header">
         <div class="mb-3 mx-auto tm-site-logo"><i class="fas fa-times fa-2x"></i></div>
-        <h1 class="text-center">Vue Sphere</h1>
+        <h1 class="text-center">Vue Sphere...</h1>
       </div>
       <MainNavigation />
       <SocialNavigation />
