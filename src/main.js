@@ -6,6 +6,7 @@ import App from './App.vue'
 import router from './router'
 import apolloClient from './apollo/client'
 import { DefaultApolloClient } from '@vue/apollo-composable'
+import i18n from './i18n'
 
 const app = createApp({
   setup() {
@@ -16,5 +17,6 @@ const app = createApp({
 
 app.use(createPinia())
 app.use(router)
+app.use(i18n)
 
 app.mount('#app')

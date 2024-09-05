@@ -1,6 +1,6 @@
 <template>
   <div class="language-switch">
-    <label v-for="language in languages" :key="language.code" class="switch-label">
+    <!-- <label v-for="language in languages" :key="language.code" class="switch-label">
       <input
         type="radio"
         name="language"
@@ -9,21 +9,54 @@
         @change="switchLanguage"
       />
       <span>{{ language.language }}</span>
-    </label>
+    </label> -->
+
+    <select @change="switchLanguage">
+      <option
+        v-for="sLocale in supportedLocales"
+        :key="`locale-${sLocale}`"
+        :value="sLocale"
+        :selected="locale === sLocale"
+      >
+        {{ t(`locale.${sLocale}`) }}
+      </option>
+    </select>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useConfigStore } from '@/stores/config'
+import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import Tr from '@/i18n/translation'
 
+const { t, locale } = useI18n()
+const supportedLocales = Tr.supportedLocales
+const router = useRouter()
 const configStore = useConfigStore()
-const languages = computed(() => configStore.languages)
-const selectedLanguage = ref(configStore.currentLanguage)
 
-const switchLanguage = () => {
-  configStore.switchLanguage(selectedLanguage.value)
+const switchLanguage = async (event) => {
+  const newLocale = event.target.value
+
+  await Tr.switchLanguage(newLocale)
+
+  try {
+    await router.replace({ params: { locale: newLocale } })
+    configStore.switchLanguage(newLocale)
+  } catch (e) {
+    console.log(e)
+    router.push('/')
+  }
 }
+
+// const configStore = useConfigStore()
+// const languages = computed(() => configStore.languages)
+// const selectedLanguage = ref(configStore.currentLanguage)
+
+// const switchLanguage = () => {
+//   configStore.switchLanguage(selectedLanguage.value)
+// }
 </script>
 
 <style scoped>

@@ -17,7 +17,8 @@
           <div class="mb-4">
             <h2 class="pt-2 tm-color-primary tm-post-title">{{ article.title }}</h2>
             <p class="tm-mb-40">
-              {{ formatDate(article.created) }} posted by {{ article.entityOwner.name }}
+              {{ formatDate(article.created) }} {{ $t('article.written_by') }}
+              {{ article.entityOwner.name }}
             </p>
             <div v-html="article.body.value"></div>
             <span class="d-block text-right tm-color-primary">

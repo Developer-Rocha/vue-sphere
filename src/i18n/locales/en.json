@@ -1,0 +1,19 @@
+{
+  "nav": {
+    "home": "Home",
+    "articles": "Articles"
+  },
+  "home": {
+    "header": "Hello {username}! Welcome to the Vue Sphere!"
+  },
+  "article": {
+    "new": "New",
+    "categories": "Categories",
+    "related_posts": "Related Articles",
+    "written_by": "Written by"
+  },
+  "locale": {
+    "en": "English",
+    "pt": "Portuguese"
+  }
+}

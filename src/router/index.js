@@ -1,24 +1,32 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouterView } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ArticleDetailView from '@/views/ArticleDetailView.vue'
+import Tr from '@/i18n/translation'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.VITE_BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView
-    },
-    {
-      path: '/article',
-      name: '/article',
-      component: () => import('../views/OverviewArticlesView.vue')
-    },
-    {
-      path: '/article/:id',
-      name: 'ArticleDetail',
-      component: ArticleDetailView
+      path: '/:locale?',
+      component: RouterView,
+      beforeEnter: Tr.routeMiddleware,
+      children: [
+        {
+          path: '',
+          name: 'home',
+          component: HomeView
+        },
+        {
+          path: 'article',
+          name: 'article',
+          component: () => import('../views/OverviewArticlesView.vue')
+        },
+        {
+          path: 'article/:id',
+          name: 'ArticleDetail',
+          component: ArticleDetailView
+        }
+      ]
     }
   ]
 })

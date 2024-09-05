@@ -112,7 +112,7 @@ hr {
 }
 
 .tm-nav-item:hover .tm-nav-link,
-.tm-nav-item .tm-nav-link.active {
+.tm-nav-item .tm-nav-link.router-link-exact-active {
   color: #0cc;
   background-color: white;
   text-decoration: none;

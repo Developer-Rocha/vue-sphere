@@ -3,7 +3,9 @@
   <div v-if="error">{{ error }}</div>
   <div v-if="tags.length" :class="props.isFilter ? 'is-filter' : ''">
     <hr v-if="!props.isFilter" class="mb-3 tm-hr-primary" />
-    <h2 v-if="!props.isFilter" class="mb-4 tm-post-title tm-color-primary">Categories</h2>
+    <h2 v-if="!props.isFilter" class="mb-4 tm-post-title tm-color-primary">
+      {{ $t('article.categories') }}
+    </h2>
     <ul class="tm-mb-75 pl-5 tm-category-list">
       <li v-for="tag in tags" :key="tag.entityId">
         <RouterLink

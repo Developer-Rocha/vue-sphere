@@ -11,10 +11,11 @@ export const useConfigStore = defineStore('configStore', {
   }),
   actions: {
     switchLanguage(language) {
-      this.currentLanguage = language
-      if (language === 'PT_BR') {
+      if (language === 'pt') {
+        this.currentLanguage = 'PT_BR'
         this.currentLangcode = 'pt-br'
       } else {
+        this.currentLanguage = 'EN'
         this.currentLangcode = 'en'
       }
     }

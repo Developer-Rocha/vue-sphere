@@ -2,15 +2,19 @@
   <nav class="tm-nav" id="tm-nav">
     <ul>
       <li class="tm-nav-item">
-        <RouterLink to="/" activeClass="active" class="tm-nav-link">
+        <RouterLink :to="Tr.i18nRoute({ name: 'home' })" activeClass="active" class="tm-nav-link">
           <IconHomeFilled size="30" />
-          Home
+          {{ $t('nav.home') }}
         </RouterLink>
       </li>
       <li class="tm-nav-item">
-        <RouterLink to="/article" activeClass="active" class="tm-nav-link">
+        <RouterLink
+          :to="Tr.i18nRoute({ name: 'article' })"
+          activeClass="active"
+          class="tm-nav-link"
+        >
           <IconArticleFilled size="30" />
-          Articles
+          {{ $t('nav.articles') }}
         </RouterLink>
       </li>
     </ul>
@@ -20,5 +24,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { IconHomeFilled, IconArticleFilled } from '@tabler/icons-vue'
+import Tr from '@/i18n/translation'
 </script>
 <style scoped></style>

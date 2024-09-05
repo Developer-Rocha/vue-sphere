@@ -3,7 +3,7 @@
   <div v-if="error">{{ error }}</div>
   <div v-if="data.length">
     <hr class="mb-3 tm-hr-primary" />
-    <h2 class="tm-mb-40 tm-post-title tm-color-primary">Related Posts</h2>
+    <h2 class="tm-mb-40 tm-post-title tm-color-primary">{{ $t('article.related_posts') }}</h2>
     <RouterLink
       v-for="(article, index) in data"
       :key="index"

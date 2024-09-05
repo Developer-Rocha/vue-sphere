@@ -11,7 +11,7 @@
       <div class="tm-post-link-inner">
         <img :src="article.fieldImage.entity.fieldMediaImage.url" alt="Image" class="img-fluid" />
       </div>
-      <span v-if="new" class="position-absolute tm-new-badge">New</span>
+      <span v-if="new" class="position-absolute tm-new-badge">{{ $t('article.new') }}</span>
       <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{ article.title }}</h2>
     </RouterLink>
 
