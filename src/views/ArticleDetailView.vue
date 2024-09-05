@@ -1,8 +1,8 @@
 <template>
   <div v-if="loading">Loading...</div>
   <div v-if="error">{{ error }}</div>
-  <ArticleDetail v-if="article.nid" :article="article" />
-  <NotFound v-if="!article.nid" />
+  <ArticleDetail v-if="article?.nid" :article="article" />
+  <NotFound v-if="!article?.nid" />
 </template>
 
 <script setup>
@@ -29,5 +29,5 @@ watch([() => route.params.id, currentLanguage], ([newId, newLanguage]) => {
   refetch({ nid: newId, language: newLanguage })
 })
 
-const article = computed(() => result.value?.nodeById.entityTranslation || {})
+const article = computed(() => result.value?.nodeById?.entityTranslation || {})
 </script>
