@@ -1,6 +1,6 @@
 <template>
   <div class="language-switch">
-    <select @change="switchLanguage">
+    <select class="language-selector" @change="switchLanguage">
       <option
         v-for="sLocale in supportedLocales"
         :key="`locale-${sLocale}`"
@@ -42,28 +42,18 @@ const switchLanguage = async (event) => {
 
 <style scoped>
 .language-switch {
-  display: flex;
-  gap: 10px;
-  margin: 20px 0;
+  margin: 30px 0;
 }
 
-.switch-label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
+.language-selector {
+  background: transparent;
+  border: none;
+  color: #fff;
+  outline: none;
 }
 
-.switch-label input[type='radio'] {
-  margin-right: 5px;
-}
-
-.switch-label span {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
-}
-
-.switch-label input[type='radio']:checked + span {
-  color: #42b983;
+.language-selector option {
+  background: #a299ae;
+  color: #fff;
 }
 </style>
