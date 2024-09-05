@@ -1,5 +1,6 @@
 import i18n from '@/i18n'
 import { nextTick } from 'vue'
+import { useConfigStore } from '../stores/config'
 
 const Trans = {
   get currentLocale() {
@@ -87,10 +88,13 @@ const Trans = {
 
   async routeMiddleware(to, _from, next) {
     const paramLocale = to.params.locale
+    const configStore = useConfigStore()
 
     if (!Trans.isLocaleSupported(paramLocale)) {
       return next(Trans.guessDefaultLocale())
     }
+
+    configStore.switchLanguage(paramLocale)
 
     await Trans.switchLanguage(paramLocale)
 

@@ -1,16 +1,5 @@
 <template>
   <div class="language-switch">
-    <!-- <label v-for="language in languages" :key="language.code" class="switch-label">
-      <input
-        type="radio"
-        name="language"
-        :value="language.code"
-        v-model="selectedLanguage"
-        @change="switchLanguage"
-      />
-      <span>{{ language.language }}</span>
-    </label> -->
-
     <select @change="switchLanguage">
       <option
         v-for="sLocale in supportedLocales"
@@ -49,14 +38,6 @@ const switchLanguage = async (event) => {
     router.push('/')
   }
 }
-
-// const configStore = useConfigStore()
-// const languages = computed(() => configStore.languages)
-// const selectedLanguage = ref(configStore.currentLanguage)
-
-// const switchLanguage = () => {
-//   configStore.switchLanguage(selectedLanguage.value)
-// }
 </script>
 
 <style scoped>
