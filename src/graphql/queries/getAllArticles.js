@@ -6,6 +6,7 @@ export const GET_ALL_ARTICLES = (search, hasTag) => gql`
     ${search ? `$title: [String],` : ''} 
     ${hasTag ? `$tag: [String],` : ''}
     $limit: Int, 
+    $offset: Int,
     $language: LanguageId,
     $langcode: String
     ) {
@@ -45,9 +46,11 @@ export const GET_ALL_ARTICLES = (search, hasTag) => gql`
           }
         ] 
       }
-      limit: $limit
+      limit: $limit,
+      offset: $offset,
       sort: {field: "created" direction: DESC}
     ){
+      count
       entities {
         ... on NodeArticle {
           entityTranslation(language: $language) {

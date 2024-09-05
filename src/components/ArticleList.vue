@@ -26,6 +26,24 @@
         :new="index <= 1"
       />
     </div>
+
+    <div v-if="totalPages > 1" class="row pagination">
+      <button
+        class="mb-2 tm-btn tm-btn-primary tm-prev-next"
+        @click="prevPage"
+        :disabled="currentPage === 1"
+      >
+        Prev
+      </button>
+      <span>Page {{ currentPage }} of {{ totalPages }}</span>
+      <button
+        class="mb-2 tm-btn tm-btn-primary tm-prev-next"
+        @click="nextPage"
+        :disabled="currentPage === totalPages"
+      >
+        Next
+      </button>
+    </div>
   </div>
 </template>
 
@@ -38,13 +56,6 @@ import ArticleItem from './ArticleItem.vue'
 import TagList from './TagList.vue'
 import { IconSearch } from '@tabler/icons-vue'
 import { useConfigStore } from '@/stores/config'
-
-const configStore = useConfigStore()
-const currentLanguage = computed(() => configStore.currentLanguage)
-const currentLangcode = computed(() => configStore.currentLangcode)
-const searchTitle = ref('')
-const router = useRouter()
-const route = useRoute()
 
 const props = defineProps({
   tag: {
@@ -62,6 +73,19 @@ const props = defineProps({
   }
 })
 
+const configStore = useConfigStore()
+const currentLanguage = computed(() => configStore.currentLanguage)
+const currentLangcode = computed(() => configStore.currentLangcode)
+const searchTitle = ref('')
+const router = useRouter()
+const route = useRoute()
+const currentPage = ref(1)
+const tag = computed(() => props.tag)
+
+const offset = computed(() => {
+  const calculatedOffset = (currentPage.value - 1) * props.limit
+  return calculatedOffset < 0 ? 0 : calculatedOffset
+})
 const hasTag = computed(() => !!props.tag?.length)
 
 const modifiedTitle = computed(() => {
@@ -75,20 +99,22 @@ const { loading, error, result, refetch } = useQuery(
   computed(() => GET_ALL_ARTICLES(props.search, hasTag.value)),
   {
     title: modifiedTitle.value,
-    tag: props.tag,
+    tag: tag,
     limit: props.limit,
+    offset: offset.value,
     language: currentLanguage,
     langcode: currentLangcode
   }
 )
 
 watch(
-  [() => modifiedTitle.value, currentLanguage, currentLangcode],
-  ([newTitle, newLanguage, newLangcode]) => {
+  [() => modifiedTitle.value, currentLanguage, currentLangcode, tag, offset],
+  ([newTitle, newLanguage, newLangcode, newTag, newOffset]) => {
     refetch({
       title: newTitle,
-      tag: props.tag,
+      tag: newTag,
       limit: props.limit,
+      offset: newOffset,
       language: newLanguage,
       langcode: newLangcode
     })
@@ -96,6 +122,14 @@ watch(
 )
 
 const articles = computed(() => result.value?.nodeQuery.entities || [])
+const totalArticles = computed(() => result.value?.nodeQuery?.count || 0)
+const totalPages = computed(() => Math.ceil(totalArticles.value / props.limit))
+
+watch(totalArticles, () => {
+  if (currentPage.value > totalPages.value) {
+    currentPage.value = totalPages.value
+  }
+})
 
 const removeTagQuery = () => {
   const query = { ...route.query }
@@ -104,18 +138,43 @@ const removeTagQuery = () => {
     delete query.tag
     router.push({ query })
 
-    const newTitle = modifiedTitle.value
-    const newLanguage = currentLanguage.value
-    const newLangcode = currentLangcode.value
+    currentPage.value = 1
 
-    refetch({
-      title: newTitle,
-      tag: '',
-      limit: props.limit,
-      language: newLanguage,
-      langcode: newLangcode
-    })
+    callRefetch(true)
   }
+}
+
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++
+
+    callRefetch()
+  }
+}
+
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--
+
+    callRefetch()
+  }
+}
+
+const callRefetch = (noTag) => {
+  const newTitle = modifiedTitle.value
+  const newTag = noTag ? '' : tag
+  const newLanguage = currentLanguage.value
+  const newLangcode = currentLangcode.value
+  const newOffset = offset.value
+
+  refetch({
+    title: newTitle,
+    tag: newTag,
+    limit: props.limit,
+    offset: newOffset,
+    language: newLanguage,
+    langcode: newLangcode
+  })
 }
 </script>
 
@@ -139,5 +198,15 @@ const removeTagQuery = () => {
 .wrap-search-input .search-input {
   width: 100%;
   height: 100%;
+}
+
+.pagination {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.pagination span {
+  margin: 0 30px;
 }
 </style>

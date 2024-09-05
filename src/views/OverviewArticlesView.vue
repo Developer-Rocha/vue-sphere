@@ -1,5 +1,5 @@
 <template>
-  <ArticleList :tag="tag" :search="true" :limit="6" />
+  <ArticleList :tag="tag" :search="true" :limit="2" />
 </template>
 
 <script setup>
