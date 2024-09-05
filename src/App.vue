@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { RouterView } from 'vue-router'
-import { IconMenu2 } from '@tabler/icons-vue'
+import { IconMenu2, IconBrandDrupal } from '@tabler/icons-vue'
 // components
 import MainNavigation from './components/MainNavigation.vue'
 import SocialNavigation from './components/SocialNavigation.vue'
@@ -26,7 +26,9 @@ function toggleMenu() {
         <IconMenu2 size="25" />
       </button>
       <div class="tm-site-header">
-        <div class="mb-3 mx-auto tm-site-logo"><i class="fas fa-times fa-2x"></i></div>
+        <div class="mb-3 mx-auto tm-site-logo">
+          <IconBrandDrupal size="50" />
+        </div>
         <h1 class="text-center">Vue Sphere</h1>
       </div>
       <MainNavigation />
@@ -41,4 +43,8 @@ function toggleMenu() {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.tm-site-logo svg {
+  color: #0678be;
+}
+</style>
