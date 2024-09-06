@@ -3,7 +3,10 @@ import cache from './cache'
 import { setContext } from '@apollo/client/link/context'
 
 const httpLink = createHttpLink({
-  uri: 'https://vue-sphere.ddev.site/graphql'
+  uri: import.meta.env.VITE_GRAPHQL_ENDPOINT,
+  headers: {
+    Authorization: `Bearer ${import.meta.env.VITE_GRAPHQL_TOKEN}`
+  }
 })
 
 // Adiciona o token de autenticação, se necessário
