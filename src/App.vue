@@ -6,6 +6,7 @@ import { IconMenu2, IconBrandDrupal } from '@tabler/icons-vue'
 import MainNavigation from './components/MainNavigation.vue'
 import SocialNavigation from './components/SocialNavigation.vue'
 import SwitchLanguage from './components/SwitchLanguage.vue'
+import SiteFooter from './components/SiteFooter.vue'
 
 const showMenu = ref(false)
 
@@ -39,6 +40,7 @@ function toggleMenu() {
   <div class="container-fluid">
     <main class="tm-main">
       <RouterView />
+      <SiteFooter />
     </main>
   </div>
 </template>
