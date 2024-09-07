@@ -21,6 +21,9 @@
               {{ article.entityOwner.name }}
             </p>
             <div v-html="article.body.value"></div>
+
+            <ParagraphsItems :paragraphs="article.fieldParagraphs" />
+
             <span class="d-block text-right tm-color-primary">
               <div class="tags">
                 <span
@@ -50,6 +53,7 @@
 <script setup>
 import TagList from './TagList.vue'
 import ArticlesByTag from './ArticlesByTag.vue'
+import ParagraphsItems from './paragraphs/ParagraphsItems.vue'
 
 const props = defineProps({
   article: {
