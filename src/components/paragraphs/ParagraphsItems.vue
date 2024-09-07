@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import ParagraphImage from './ParagraphImage.vue'
 import ParagraphText from './ParagraphText.vue'
 import ParagraphTextWithImage from './ParagraphTextWithImage.vue'
@@ -28,6 +28,13 @@ const props = defineProps({
 })
 
 const paragraphs = ref(props.paragraphs)
+
+watch(
+  () => props.paragraphs,
+  (newVal) => {
+    paragraphs.value = newVal
+  }
+)
 </script>
 <style scoped>
 .paragraphs {

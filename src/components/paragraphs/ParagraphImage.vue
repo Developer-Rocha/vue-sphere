@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   paragraph: {
@@ -20,5 +20,12 @@ const props = defineProps({
 })
 
 const paragraph = ref(props.paragraph)
+
+watch(
+  () => props.paragraph,
+  (newVal) => {
+    paragraph.value = newVal
+  }
+)
 </script>
 <style scoped></style>
