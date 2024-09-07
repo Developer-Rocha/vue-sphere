@@ -27,7 +27,7 @@
       />
     </div>
 
-    <div v-if="totalPages > 1" class="row pagination">
+    <div v-if="(totalPages > 1) & showPagination" class="row pagination">
       <button
         class="mb-2 tm-btn tm-btn-primary tm-prev-next"
         @click="prevPage"
@@ -70,6 +70,11 @@ const props = defineProps({
     type: Number,
     required: false,
     default: 4
+  },
+  showPagination: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
@@ -81,6 +86,7 @@ const router = useRouter()
 const route = useRoute()
 const currentPage = ref(1)
 const tag = computed(() => props.tag)
+const showPagination = ref(props.showPagination)
 
 const offset = computed(() => {
   const calculatedOffset = (currentPage.value - 1) * props.limit
@@ -131,6 +137,12 @@ watch(totalArticles, () => {
   }
 })
 
+watch(
+  () => props.showPagination,
+  (newVal) => {
+    showPagination.value = newVal
+  }
+)
 const removeTagQuery = () => {
   const query = { ...route.query }
 

@@ -1,5 +1,5 @@
 <template>
-  <ArticleList :tag="tag" :search="true" :limit="4" />
+  <ArticleList :tag="tag" :search="true" :limit="4" :show-pagination="true" />
 </template>
 
 <script setup>

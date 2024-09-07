@@ -3,5 +3,5 @@ import ArticleList from '@/components/ArticleList.vue'
 </script>
 
 <template>
-  <ArticleList />
+  <ArticleList :limit="2" />
 </template>
