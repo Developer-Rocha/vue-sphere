@@ -14,10 +14,12 @@
               ? 'active tm-color-primary'
               : 'tm-color-primary'
           "
-          :to="{
-            path: '/article',
-            query: { tag: tag.entityId }
-          }"
+          :to="
+            Tr.i18nRoute({
+              name: 'Article',
+              query: { tag: tag.entityId }
+            })
+          "
         >
           {{ tag.entityLabel }}
         </RouterLink>
@@ -39,6 +41,7 @@ import { computed } from 'vue'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_ALL_TAGS } from '../graphql/queries/getAllTags'
+import Tr from '@/i18n/translation'
 
 const props = defineProps({
   isFilter: {

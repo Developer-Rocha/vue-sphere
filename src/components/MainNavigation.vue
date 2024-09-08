@@ -9,7 +9,7 @@
       </li>
       <li class="tm-nav-item">
         <RouterLink
-          :to="Tr.i18nRoute({ name: 'article' })"
+          :to="Tr.i18nRoute({ name: 'Article' })"
           activeClass="active"
           class="tm-nav-link"
         >

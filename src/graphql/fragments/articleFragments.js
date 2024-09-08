@@ -70,6 +70,7 @@ export const ARTICLE_FIELDS = gql`
   fragment ArticleFields on NodeArticle {
     title
     nid
+    pathAlias: fieldPathAlias
     created
     entityOwner {
       name

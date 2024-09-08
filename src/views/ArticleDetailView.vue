@@ -11,23 +11,28 @@ import { useRoute } from 'vue-router'
 import ArticleDetail from '@/components/ArticleDetail.vue'
 import NotFound from '@/components/NotFound.vue'
 import { useQuery } from '@vue/apollo-composable'
-import { GET_ARTICLE_BY_ID } from '@/graphql/queries/getArticleById'
+import { GET_ARTICLE } from '@/graphql/queries/getArticle'
 import { useConfigStore } from '@/stores/config'
 
 const configStore = useConfigStore()
 const currentLanguage = computed(() => configStore.currentLanguage)
 const route = useRoute()
-const articleId = ref(route.params.id)
+const articlePath = ref(addLeadingSlash(route.params.slug))
 
-const { loading, error, result, refetch } = useQuery(GET_ARTICLE_BY_ID, {
-  nid: articleId,
-  language: currentLanguage
+const { loading, error, result, refetch } = useQuery(GET_ARTICLE, {
+  language: currentLanguage,
+  path: articlePath
 })
 
-watch([() => route.params.id, currentLanguage], ([newId, newLanguage]) => {
-  articleId.value = newId
-  refetch({ nid: newId, language: newLanguage })
+watch([() => route.params.slug, currentLanguage], ([newPath, newLanguage]) => {
+  const updatedPath = addLeadingSlash(newPath)
+  articlePath.value = updatedPath
+  refetch({ language: newLanguage, path: updatedPath })
 })
 
-const article = computed(() => result.value?.nodeById?.entityTranslation || {})
+const article = computed(() => result.value?.nodeQuery?.entities[0].entityTranslation || {})
+
+function addLeadingSlash(pathAlias) {
+  return pathAlias.startsWith('/') ? pathAlias : `/${pathAlias}`
+}
 </script>

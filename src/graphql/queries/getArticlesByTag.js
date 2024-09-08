@@ -14,25 +14,13 @@ export const GET_ARTICLES_BY_TAG = (tag) => gql`
       offset: 0, 
       filter: {
         conditions:[
-          {
-            operator: NOT_EQUAL
-            field: "nid"
-            value: [$nid]
-          },
-          {
-            operator: EQUAL,
-            field: "langcode.value",
-            value: [$langcode]
-          }
+          { field: "nid", value: [$nid], operator: NOT_EQUAL },
+          { field: "langcode.value", operator: EQUAL,value: [$langcode] }
           ${
             tag && tag.length
               ? `
-          ,{
-            operator: IN, 
-            field: "field_tags.entity.tid", 
-            value: $termIds
-          }
-          `
+              ,{ field: "field_tags.entity.tid", operator: IN, value: $termIds }
+            `
               : ''
           }
         ],

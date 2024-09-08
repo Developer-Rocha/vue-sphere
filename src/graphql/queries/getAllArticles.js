@@ -13,34 +13,20 @@ export const GET_ALL_ARTICLES = (search, hasTag) => gql`
     nodeQuery(
       filter: { 
         conditions: [
-          { 
-            field: "status", 
-            value: "1" 
-          },
-          {
-            operator: EQUAL,
-            field: "langcode.value",
-            value: [$langcode]
-          }
+          { field: "status", value: "1", operator: EQUAL},
+          { field: "langcode.value", value: [$langcode], operator: EQUAL},
+          { field: "field_path_alias", operator: IS_NOT_NULL}
           ${
             search
               ? `
-            ,{
-              operator: LIKE,
-              field: "title",
-              value: $title
-            }
-          `
+            ,{ field: "title", value: $title, operator: LIKE}
+            `
               : ''
           }
           ${
             hasTag
               ? `
-          ,{
-            operator: IN, 
-            field: "field_tags.entity.tid", 
-            value: $tag
-          }
+          ,{ field: "field_tags.entity.tid", value: $tag, operator: IN}
           `
               : ''
           }
@@ -52,11 +38,9 @@ export const GET_ALL_ARTICLES = (search, hasTag) => gql`
     ){
       count
       entities {
-        ... on NodeArticle {
-          entityTranslation(language: $language) {
+        entityTranslation(language: $language) {
             ...ArticleFields
           }
-        }
       }
     }
   }

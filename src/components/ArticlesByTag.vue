@@ -10,7 +10,7 @@
       class="d-block tm-mb-40"
       :to="{
         name: 'ArticleDetail',
-        params: { id: article.entityTranslation.nid }
+        params: { slug: removeLeadingSlash(article.entityTranslation.pathAlias) }
       }"
     >
       <figure>
@@ -53,16 +53,17 @@ const props = defineProps({
 })
 
 const tag = props.termIds.map((term) => String(term.targetId))
+const nid = ref(props.nid)
 
 const { loading, error, result, refetch } = useQuery(GET_ARTICLES_BY_TAG(tag), {
-  nid: props.nid,
+  nid: nid,
   termIds: tag,
   limit: props.limit,
   language: currentLanguage,
   langcode: currentLangcode
 })
 
-watch([() => props.nid, currentLanguage, currentLangcode], ([newId, newLanguage, newLangcode]) => {
+watch([() => nid, currentLanguage, currentLangcode], ([newId, newLanguage, newLangcode]) => {
   refetch({
     nid: newId,
     limit: props.limit,
@@ -72,4 +73,8 @@ watch([() => props.nid, currentLanguage, currentLangcode], ([newId, newLanguage,
 })
 
 const data = computed(() => result.value?.nodeQuery.entities || [])
+
+function removeLeadingSlash(pathAlias) {
+  return pathAlias ? pathAlias.replace(/^\//, '') : '/not-found'
+}
 </script>

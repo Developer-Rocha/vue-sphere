@@ -5,7 +5,7 @@
       class="effect-lily tm-post-link tm-pt-60"
       :to="{
         name: 'ArticleDetail',
-        params: { id: article.nid }
+        params: { slug: removeLeadingSlash(article.pathAlias) }
       }"
     >
       <div class="tm-post-link-inner">
@@ -61,6 +61,10 @@ function formatDate(timestamp) {
     month: 'long',
     day: '2-digit'
   })
+}
+
+function removeLeadingSlash(pathAlias) {
+  return pathAlias ? pathAlias.replace(/^\//, '') : '/not-found'
 }
 </script>
 

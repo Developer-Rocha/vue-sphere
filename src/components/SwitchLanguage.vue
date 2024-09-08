@@ -14,9 +14,8 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
 import { useConfigStore } from '@/stores/config'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import Tr from '@/i18n/translation'
 
@@ -33,6 +32,8 @@ const switchLanguage = async (event) => {
   try {
     await router.replace({ params: { locale: newLocale } })
     configStore.switchLanguage(newLocale)
+    // Redirect to home when switch language.
+    router.push({ name: 'home' })
   } catch (e) {
     console.log(e)
     router.push('/')
