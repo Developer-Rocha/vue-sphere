@@ -40,7 +40,7 @@ hr {
   left: 0;
   bottom: 0;
   z-index: 100;
-  width: 400px;
+  width: 275px;
   overflow-y: visible;
 }
 
@@ -78,7 +78,7 @@ hr {
 }
 
 .tm-main {
-  margin-left: 400px;
+  margin-left: 275px;
   padding: 80px 100px 25px;
 }
 
@@ -105,7 +105,7 @@ hr {
   background-color: transparent;
   height: 75px;
   width: 100%;
-  max-width: 300px;
+  max-width: 220px;
   display: flex;
   align-items: center;
   font-size: 1.4rem;
@@ -127,7 +127,7 @@ hr {
 .tm-nav-item.active:after {
   content: '';
   width: 100%;
-  max-width: 300px;
+  max-width: 220px;
   height: 75px;
   display: block;
   border: 1px solid white;
@@ -572,12 +572,12 @@ a:hover figcaption {
 
 @media (max-width: 1540px) {
   .tm-header {
-    width: 320px;
+    width: 275px;
   }
 
   .tm-main {
-    margin-left: 320px;
-    width: calc(100% - 320px);
+    margin-left: 275px;
+    width: calc(100% - 275px);
   }
 }
 
@@ -616,8 +616,8 @@ a:hover figcaption {
 /* Hide sidebar */
 @media (max-width: 991px) {
   .tm-header {
-    width: 320px;
-    left: -320px;
+    width: 275px;
+    left: -275px;
     transition: all 0.3s ease;
   }
 
@@ -642,7 +642,7 @@ a:hover figcaption {
   }
 
   .tm-header.show .navbar-toggler {
-    left: 320px;
+    left: 275px;
   }
 
   .tm-main {

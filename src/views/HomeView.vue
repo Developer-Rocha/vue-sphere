@@ -1,18 +1,22 @@
 <template>
   <div v-if="loading">Loading...</div>
   <div v-if="error">{{ error }}</div>
-  <div class="row tm-row">
-    <div v-if="data.fieldBanner" class="col-12">
+  <div v-if="data.fieldBanner" class="row tm-row">
+    <div class="col-12">
       <hr class="tm-hr-primary tm-mb-55" />
       <img :src="data.fieldBanner.entity.fieldMediaImage.url" alt="Image" class="img-fluid" />
     </div>
   </div>
-  <ParagraphsItems v-if="data.fieldParagraphs" :paragraphs="data.fieldParagraphs" />
+  <KeepAlive>
+    <ParagraphsItems v-if="data.fieldParagraphs" :paragraphs="data.fieldParagraphs" />
+  </KeepAlive>
 
   <div class="tm-mb-40">
     <h2>{{ $t('home.recent_articles') }}</h2>
   </div>
-  <ArticleList :limit="2" />
+  <KeepAlive>
+    <ArticleList :limit="2" />
+  </KeepAlive>
 </template>
 
 <script setup>
