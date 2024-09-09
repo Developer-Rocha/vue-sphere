@@ -10,7 +10,7 @@
       class="d-block tm-mb-40"
       :to="{
         name: 'ArticleDetail',
-        params: { slug: removeLeadingSlash(article.entityTranslation.pathAlias) }
+        params: { slug: Helpers.removeLeadingSlash(article.entityTranslation.pathAlias) }
       }"
     >
       <figure>
@@ -31,6 +31,7 @@ import { RouterLink } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_ARTICLES_BY_TAG } from '../graphql/queries/getArticlesByTag'
 import { useConfigStore } from '@/stores/config'
+import Helpers from '@/utils/helpers/global'
 
 const configStore = useConfigStore()
 const currentLanguage = computed(() => configStore.currentLanguage)
@@ -73,8 +74,4 @@ watch([() => nid, currentLanguage, currentLangcode], ([newId, newLanguage, newLa
 })
 
 const data = computed(() => result.value?.nodeQuery.entities || [])
-
-function removeLeadingSlash(pathAlias) {
-  return pathAlias ? pathAlias.replace(/^\//, '') : '/not-found'
-}
 </script>

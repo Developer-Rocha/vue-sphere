@@ -5,7 +5,7 @@
       class="effect-lily tm-post-link tm-pt-60"
       :to="{
         name: 'ArticleDetail',
-        params: { slug: removeLeadingSlash(article.pathAlias) }
+        params: { slug: Helpers.removeLeadingSlash(article.pathAlias) }
       }"
     >
       <div class="tm-post-link-inner">
@@ -42,6 +42,7 @@
 </template>
 <script setup>
 import { RouterLink } from 'vue-router'
+import Helpers from '@/utils/helpers/global'
 
 const props = defineProps({
   article: {
@@ -61,10 +62,6 @@ function formatDate(timestamp) {
     month: 'long',
     day: '2-digit'
   })
-}
-
-function removeLeadingSlash(pathAlias) {
-  return pathAlias ? pathAlias.replace(/^\//, '') : '/not-found'
 }
 </script>
 
