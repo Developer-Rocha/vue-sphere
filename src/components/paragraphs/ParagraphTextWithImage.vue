@@ -7,7 +7,7 @@
       class="img-fluid article-banner"
     />
     <h2 v-if="paragraph.fieldTitle">{{ paragraph.fieldTitle }}</h2>
-    <div v-if="paragraph.fieldText.value" v-html="paragraph.fieldText.value"></div>
+    <div v-if="paragraph.fieldText.value" v-highlightjs v-html="paragraph.fieldText.value"></div>
   </div>
 </template>
 

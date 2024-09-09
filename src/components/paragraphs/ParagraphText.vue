@@ -1,7 +1,7 @@
 <template>
   <div v-if="paragraph" class="tm-mb-40">
     <h2 v-if="paragraph.fieldTitle">{{ paragraph.fieldTitle }}</h2>
-    <div v-if="paragraph.fieldText.value" v-html="paragraph.fieldText.value"></div>
+    <div v-if="paragraph.fieldText.value" v-highlightjs v-html="paragraph.fieldText.value"></div>
   </div>
 </template>
 

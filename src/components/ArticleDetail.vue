@@ -20,7 +20,7 @@
               {{ formatDate(article.created) }} {{ $t('article.written_by') }}
               {{ article.entityOwner.name }}
             </p>
-            <div v-html="article.body.value"></div>
+            <div v-highlightjs v-html="article.body.value"></div>
 
             <ParagraphsItems :paragraphs="article.fieldParagraphs" />
 
