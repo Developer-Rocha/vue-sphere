@@ -174,7 +174,7 @@ const prevPage = () => {
 
 const callRefetch = (noTag) => {
   const newTitle = modifiedTitle.value
-  const newTag = noTag ? '' : tag
+  const newTag = noTag ? '' : tag.value
   const newLanguage = currentLanguage.value
   const newLangcode = currentLangcode.value
   const newOffset = offset.value
