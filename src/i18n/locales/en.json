@@ -4,7 +4,8 @@
     "articles": "Articles"
   },
   "home": {
-    "header": "Hello {username}! Welcome to the Vue Sphere!"
+    "header": "Hello {username}! Welcome to the Vue Sphere!",
+    "recent_articles": "Recent articles"
   },
   "article": {
     "new": "New",

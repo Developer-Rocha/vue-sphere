@@ -1,3 +1,20 @@
+<template>
+  <div v-if="loading">Loading...</div>
+  <div v-if="error">{{ error }}</div>
+  <div class="row tm-row">
+    <div v-if="data.fieldBanner" class="col-12">
+      <hr class="tm-hr-primary tm-mb-55" />
+      <img :src="data.fieldBanner.entity.fieldMediaImage.url" alt="Image" class="img-fluid" />
+    </div>
+  </div>
+  <ParagraphsItems v-if="data.fieldParagraphs" :paragraphs="data.fieldParagraphs" />
+
+  <div class="tm-mb-40">
+    <h2>{{ $t('home.recent_articles') }}</h2>
+  </div>
+  <ArticleList :limit="2" />
+</template>
+
 <script setup>
 import { computed, ref, watch } from 'vue'
 import { useQuery } from '@vue/apollo-composable'
@@ -22,20 +39,4 @@ watch([() => currentLanguage], ([newLanguage]) => {
 const data = computed(() => result.value?.nodeById || {})
 </script>
 
-<template>
-  <div v-if="loading">Loading...</div>
-  <div v-if="error">{{ error }}</div>
-  <div class="row tm-row">
-    <div class="col-12">
-      <hr class="tm-hr-primary tm-mb-55" />
-      <img
-        v-if="data.fieldBanner"
-        :src="data.fieldBanner.entity.fieldMediaImage.url"
-        alt="Image"
-        class="img-fluid article-banner"
-      />
-    </div>
-  </div>
-  <ParagraphsItems v-if="data.fieldParagraphs" :paragraphs="data.fieldParagraphs" />
-  <ArticleList :limit="2" />
-</template>
+<style scoped></style>

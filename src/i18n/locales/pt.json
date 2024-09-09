@@ -4,7 +4,8 @@
     "articles": "Artigos"
   },
   "home": {
-    "header": "Olá {username}! Bem vindo ao Vue Sphere!"
+    "header": "Olá {username}! Bem vindo ao Vue Sphere!",
+    "recent_articles": "Artigos recentes"
   },
   "article": {
     "new": "Novo",
