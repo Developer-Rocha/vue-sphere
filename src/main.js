@@ -7,7 +7,7 @@ import router from './router'
 import apolloClient from './apollo/client'
 import { DefaultApolloClient } from '@vue/apollo-composable'
 import i18n from './i18n'
-import VueHighlightJS from 'vue3-highlightjs'
+import hljs from 'highlight.js'
 import 'highlight.js/styles/default.css'
 
 const app = createApp({
@@ -17,9 +17,23 @@ const app = createApp({
   render: () => h(App)
 })
 
+app.directive('highlightjs', {
+  beforeMount(el) {
+    const codeBlocks = el.querySelectorAll('pre code')
+    codeBlocks.forEach((block) => {
+      hljs.highlightElement(block)
+    })
+  },
+  updated(el) {
+    const codeBlocks = el.querySelectorAll('pre code')
+    codeBlocks.forEach((block) => {
+      hljs.highlightElement(block)
+    })
+  }
+})
+
 app.use(createPinia())
 app.use(router)
 app.use(i18n)
-app.use(VueHighlightJS)
 
 app.mount('#app')
