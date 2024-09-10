@@ -17,7 +17,7 @@
           <div class="mb-4">
             <h2 class="pt-2 tm-color-primary tm-post-title">{{ article.title }}</h2>
             <p class="tm-mb-40">
-              {{ formatDate(article.created) }} {{ $t('article.written_by') }}
+              {{ Helpers.formatDate(article.created) }} {{ $t('article.written_by') }}
               {{ article.entityOwner.name }}
             </p>
             <div v-highlightjs v-html="article.body.value"></div>
@@ -54,6 +54,7 @@
 import TagList from './TagList.vue'
 import ArticlesByTag from './ArticlesByTag.vue'
 import ParagraphsItems from './paragraphs/ParagraphsItems.vue'
+import Helpers from '@/utils/helpers/global'
 
 const props = defineProps({
   article: {
@@ -61,15 +62,6 @@ const props = defineProps({
     required: true
   }
 })
-
-function formatDate(timestamp) {
-  const date = new Date(timestamp * 1000)
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: '2-digit'
-  })
-}
 </script>
 <style scoped>
 .article-banner {

@@ -31,7 +31,7 @@
       </div>
 
       <span class="tm-color-primary">
-        {{ formatDate(article.created) }}
+        {{ Helpers.formatDate(article.created) }}
       </span>
     </div>
     <hr />
@@ -54,15 +54,6 @@ const props = defineProps({
     required: false
   }
 })
-
-function formatDate(timestamp) {
-  const date = new Date(timestamp * 1000)
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: '2-digit'
-  })
-}
 </script>
 
 <style scoped></style>
