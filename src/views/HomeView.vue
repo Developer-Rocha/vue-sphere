@@ -1,5 +1,7 @@
 <template>
-  <div v-if="loading">Loading...</div>
+  <div v-if="loading">
+    <SiteLoading />
+  </div>
   <div v-if="error">{{ error }}</div>
   <div v-if="data.fieldBanner" class="row tm-row">
     <div class="col-12">
@@ -27,6 +29,7 @@ import { useConfigStore } from '@/stores/config'
 // Componentes.
 import ArticleList from '@/components/ArticleList.vue'
 import ParagraphsItems from '@/components/paragraphs/ParagraphsItems.vue'
+import SiteLoading from '@/components/SiteLoading.vue'
 
 const configStore = useConfigStore()
 const currentLanguage = computed(() => configStore.currentLanguage)

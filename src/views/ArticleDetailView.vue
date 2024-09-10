@@ -1,5 +1,7 @@
 <template>
-  <div v-if="loading">Loading...</div>
+  <div v-if="loading">
+    <SiteLoading />
+  </div>
   <div v-if="error">{{ error }}</div>
   <ArticleDetail v-if="article?.nid" :article="article" />
   <NotFound v-if="!article?.nid" />
@@ -8,11 +10,13 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import ArticleDetail from '@/components/ArticleDetail.vue'
-import NotFound from '@/components/NotFound.vue'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_ARTICLE } from '@/graphql/queries/getArticle'
 import { useConfigStore } from '@/stores/config'
+// Components.
+import SiteLoading from '@/components/SiteLoading.vue'
+import ArticleDetail from '@/components/ArticleDetail.vue'
+import NotFound from '@/components/NotFound.vue'
 
 const configStore = useConfigStore()
 const currentLanguage = computed(() => configStore.currentLanguage)
