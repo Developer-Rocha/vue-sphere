@@ -23,7 +23,12 @@
   </header>
   <div class="container-fluid">
     <main class="tm-main">
-      <RouterView />
+      <RouterView v-slot="{ Component }">
+        <Transition name="fade" mode="out-in">
+          <component :is="Component" />
+        </Transition>
+      </RouterView>
+
       <SiteFooter />
     </main>
   </div>
