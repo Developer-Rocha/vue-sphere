@@ -1,9 +1,10 @@
 <template>
-  <WebForm webformId="contact" />
+  <div>
+    <WebForm webformId="contact" />
+  </div>
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
 import WebForm from '@/components/WebForm.vue'
 </script>
 
