@@ -17,13 +17,23 @@
           {{ $t('nav.articles') }}
         </RouterLink>
       </li>
+      <li class="tm-nav-item">
+        <RouterLink
+          :to="Tr.i18nRoute({ name: 'Contact' })"
+          activeClass="active"
+          class="tm-nav-link"
+        >
+          <IconBrandHipchat size="30" />
+          {{ $t('nav.contact') }}
+        </RouterLink>
+      </li>
     </ul>
   </nav>
 </template>
 
 <script setup>
 import { RouterLink } from 'vue-router'
-import { IconHomeFilled, IconArticleFilled } from '@tabler/icons-vue'
+import { IconHomeFilled, IconArticleFilled, IconBrandHipchat } from '@tabler/icons-vue'
 import Tr from '@/i18n/translation'
 </script>
 <style scoped></style>
