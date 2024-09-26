@@ -1,7 +1,8 @@
 {
   "nav": {
     "home": "Início",
-    "articles": "Artigos"
+    "articles": "Artigos",
+    "contact": "Contato"
   },
   "home": {
     "header": "Olá {username}! Bem vindo ao Vue Sphere!",

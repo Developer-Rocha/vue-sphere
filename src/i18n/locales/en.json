@@ -1,7 +1,8 @@
 {
   "nav": {
     "home": "Home",
-    "articles": "Articles"
+    "articles": "Articles",
+    "contact": "Contact"
   },
   "home": {
     "header": "Hello {username}! Welcome to the Vue Sphere!",
