@@ -9,6 +9,7 @@ import { DefaultApolloClient } from '@vue/apollo-composable'
 import i18n from './i18n'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/default.css'
+import VueHoneypot from 'vue-honeypot'
 
 const app = createApp({
   setup() {
@@ -33,6 +34,7 @@ app.directive('highlightjs', {
 })
 
 app.use(createPinia())
+app.use(VueHoneypot)
 app.use(router)
 app.use(i18n)
 

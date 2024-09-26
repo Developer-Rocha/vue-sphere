@@ -31,6 +31,9 @@
       </div>
     </div>
 
+    <!-- Setup the honeypot -->
+    <vue-honeypot ref="honeypot" />
+
     <div v-if="submitEnd" class="form-submit-response">
       <div v-if="errorSubmit" class="error">
         <ul>
@@ -77,6 +80,9 @@ const errorSubmit = ref([])
 const { mutate: submitWebform, onDone, onError } = useMutation(POST_WEBFORM)
 
 const submitForm = async () => {
+  // Honeypot validation.
+  this.$refs.honeypot.validate()
+
   // Include the webform_id in the data.
   formData.value.webform_id = props.webformId
 
