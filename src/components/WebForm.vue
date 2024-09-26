@@ -56,7 +56,6 @@ import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { useQuery, useMutation } from '@vue/apollo-composable'
 import { GET_WEBFORM } from '../graphql/queries/getWebform'
 import { POST_WEBFORM } from '../graphql/mutations/postWebform'
-import Tr from '@/i18n/translation'
 
 const props = defineProps({
   webformId: {
