@@ -37,6 +37,7 @@
 import { ref } from 'vue'
 import { RouterView } from 'vue-router'
 import { IconMenu2, IconBrandDrupal } from '@tabler/icons-vue'
+import { useHead, useSeoMeta } from '@unhead/vue'
 // components
 import MainNavigation from './components/MainNavigation.vue'
 import SocialNavigation from './components/SocialNavigation.vue'
@@ -48,6 +49,25 @@ const showMenu = ref(false)
 function toggleMenu() {
   showMenu.value = !showMenu.value
 }
+
+useHead({
+  title: 'Blog Drupalizer',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'A constructive and inclusive social network for software developers. With you every step of your journey.'
+    }
+  ]
+})
+
+useSeoMeta({
+  canonical: 'https://blog.drupalizer.tech/',
+  ogTitle: 'Blog Drupalizer',
+  ogDescription:
+    'A constructive and inclusive social network for software developers. With you every step of your journey.',
+  ogUrl: 'https://blog.drupalizer.tech/'
+})
 </script>
 <style scoped>
 .tm-site-logo svg {

@@ -22,15 +22,18 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue'
+import { computed, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_PAGE } from '@/graphql/queries/getPage'
 import { useConfigStore } from '@/stores/config'
+import { useSeoMeta } from '@unhead/vue'
 // Componentes.
 import ArticleList from '@/components/ArticleList.vue'
 import ParagraphsItems from '@/components/paragraphs/ParagraphsItems.vue'
 import SiteLoading from '@/components/SiteLoading.vue'
 
+const route = useRoute()
 const configStore = useConfigStore()
 const currentLanguage = computed(() => configStore.currentLanguage)
 
@@ -39,11 +42,17 @@ const { loading, error, result, refetch } = useQuery(GET_PAGE, {
   language: currentLanguage
 })
 
+const data = computed(() => result.value?.nodeById || {})
+
 watch([() => currentLanguage], ([newLanguage]) => {
   refetch({ id: '7', language: newLanguage })
 })
 
-const data = computed(() => result.value?.nodeById || {})
+useSeoMeta({
+  title: 'Blog Drupalizer - Homepage',
+  canonical: 'https://blog.drupalizer.tech' + route.path,
+  ogUrl: 'https://blog.drupalizer.tech' + route.path
+})
 </script>
 
 <style scoped></style>

@@ -13,6 +13,7 @@ import { useRoute } from 'vue-router'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_ARTICLE } from '@/graphql/queries/getArticle'
 import { useConfigStore } from '@/stores/config'
+import { useHead, useSeoMeta } from '@unhead/vue'
 // Components.
 import SiteLoading from '@/components/SiteLoading.vue'
 import ArticleDetail from '@/components/ArticleDetail.vue'
@@ -39,4 +40,13 @@ const article = computed(() => result.value?.nodeQuery?.entities[0].entityTransl
 function addLeadingSlash(pathAlias) {
   return pathAlias.startsWith('/') ? pathAlias : `/${pathAlias}`
 }
+
+useSeoMeta({
+  title: 'Blog Drupalizer - ' + article.value.title,
+  canonical: 'https://blog.drupalizer.tech' + route.path,
+  description: article.value.fieldTeaser,
+  ogTitle: article.value.title,
+  ogDescription: article.value.fieldTeaser,
+  ogUrl: 'https://blog.drupalizer.tech' + route.path
+})
 </script>

@@ -2,6 +2,7 @@ import '@/assets/bootstrap.min.css'
 import '@/scss/theme.scss'
 import { createApp, provide, h } from 'vue'
 import { createPinia } from 'pinia'
+import { createHead } from '@unhead/vue'
 import App from './App.vue'
 import router from './router'
 import apolloClient from './apollo/client'
@@ -33,9 +34,12 @@ app.directive('highlightjs', {
   }
 })
 
+const head = createHead()
+
 app.use(createPinia())
 app.use(VueHoneypot)
 app.use(router)
 app.use(i18n)
+app.use(head)
 
 app.mount('#app')

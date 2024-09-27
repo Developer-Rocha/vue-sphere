@@ -38,12 +38,15 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue'
-import Tr from '@/i18n/translation'
+import { useRoute } from 'vue-router'
+import { useSeoMeta } from '@unhead/vue'
 import { useQuery } from '@vue/apollo-composable'
 import { GET_CONTACT_INFO } from '@/graphql/queries/getContactInfo'
+import Tr from '@/i18n/translation'
 import WebForm from '@/components/WebForm.vue'
 import SocialNavigation from '@/components/SocialNavigation.vue'
 
+const route = useRoute()
 const currentLanguage = ref(Tr.currentLocale)
 /*
  * contact_info receives two entites.
@@ -62,6 +65,12 @@ watch(
     contact_index.value = newIndex
   }
 )
+
+useSeoMeta({
+  title: 'Blog Drupalizer - Contact',
+  canonical: 'https://blog.drupalizer.tech' + route.path,
+  ogUrl: 'https://blog.drupalizer.tech' + route.path
+})
 </script>
 
 <style scoped></style>
