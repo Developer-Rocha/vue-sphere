@@ -1,10 +1,10 @@
 <template>
-  <div v-if="loading">
-    <SiteLoading />
+  <div>
+    <SiteLoading v-if="loading" />
+    <div v-if="error">{{ error }}</div>
+    <ArticleDetail v-if="article?.nid" :article="article" />
+    <NotFound v-if="!article?.nid" />
   </div>
-  <div v-if="error">{{ error }}</div>
-  <ArticleDetail v-if="article?.nid" :article="article" />
-  <NotFound v-if="!article?.nid" />
 </template>
 
 <script setup>
